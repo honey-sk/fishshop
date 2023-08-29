@@ -1,0 +1,69 @@
+# -------------------------------------------------------#
+on load:
+	set {TF} to tropical fish
+	set lore of {TF} to "&aSell price &f> &e10 Coins"
+	set name of {TF} to "&bTropical Fish"
+#
+	set {RC} to raw cod
+	set lore of {RC} to "&aSell price &f> &e10 Coins"
+	set name of {RC} to "&bRaw Cod"
+#
+	set {RS} to raw salmon
+	set lore of {RS} to  "&aSell price &f> &e10 Coins"
+	set name of {Rs} to "&bRaw Salmon"
+# -------------------------------------------------------#
+
+
+# ----------------------------------------------------------------------------------------#
+command /fish: 
+	trigger:
+		set {_fish} to chest inventory with 3 rows named "<##52a6fd>ғɪsʜ sʜᴏᴘ" 
+		set slot (integers between 0 and 53) of {_fish} to black glass pane named " "
+		set slot 12 of {_fish} to {TF}
+		set slot 13 of {_fish} to {RC}
+		set slot 14 of {_fish} to {RS}
+		open {_fish} to player
+# ----------------------------------------------------------------------------------------#
+
+# ----------------------------------------------------------------------------------------------------------#
+on inventory click:
+	if name of event-inventory is "<##52a6fd>ғɪsʜ sʜᴏᴘ": #makes it so players are unanble to grab the items
+		cancel event
+
+		if event-slot is 12: #checks if tropical fish is clicked
+			if player has tropical fish:
+				play sound "entity.experience_orb.pickup" at volume 100 at pitch 1 to player
+				remove tropical fish from inventory of player
+				add 10 to player's account 
+
+			else:
+				close player's inventory
+				play sound "entity.villager.no" at volume 100 at pitch 1 to player
+				send "&cYou dont have any tropical fish!" to player
+# ----------------------------------------------------------------------------------------------------------#
+
+# ----------------------------------------------------------------------------------------------------------#
+		if event-slot is 13: #checks if cod is clicked
+			if player has raw cod:
+				play sound "entity.experience_orb.pickup" at volume 100 at pitch 1 to player
+				remove raw cod from inventory of player
+				add 10 to player's account 
+
+			else:
+				close player's inventory
+				play sound "entity.villager.no" at volume 100 at pitch 1 to player
+				send "&cYou dont have any raw cod!" to player
+# ----------------------------------------------------------------------------------------------------------#
+
+# ----------------------------------------------------------------------------------------------------------#
+		if event-slot is 14: #checks if samonm is clicked
+			if player has raw salmon:
+				play sound "entity.experience_orb.pickup" at volume 100 at pitch 1 to player
+				remove raw salmon from inventory of player
+				add 10 to player's account 
+
+			else:
+				close player's inventory
+				play sound "entity.villager.no" at volume 100 at pitch 1 to player
+				send "&cYou dont have any raw salmon!" to player
+# ----------------------------------------------------------------------------------------------------------#
